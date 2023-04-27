@@ -55,7 +55,7 @@ public class ExtendsStudentRecord extends StudentRecord{
         aliRecord.print(95,80,90);
         System.out.println("Rata-Rata     : "+aliRecord.getAverage());
         
-        System.out.println("Count :"+nayla060423.StudentRecord.getStudentCount());
+        System.out.println("Count :"+nayla060423.StudentRecord.getstudentCount());
     }
     
     @Override

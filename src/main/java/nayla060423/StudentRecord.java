@@ -89,7 +89,7 @@ public class StudentRecord {
         return average;
     }
     
-    public static int getStudentCount() {
+    public static int getstudentCount() {
         return studentCount;
     }
     

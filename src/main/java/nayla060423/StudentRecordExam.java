@@ -12,8 +12,8 @@ public class StudentRecordExam {
     public static void main(String[] args){
         StudentRecord anna = new StudentRecord("Anna", "Padang");
         anna.print("");
-        anna.nilai = 0;
+        System.out.println("Jumlah Record :   "+StudentRecord.getstudentCount());
     }
-        System.out.println("Jumlah Record : "+StudentRecord.getStudentCount());
+      
 }
 

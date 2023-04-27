@@ -55,6 +55,6 @@ public class StudentRecordExample {
         aliRecord.print(95,80,90);
         System.out.println("Rata-Rata     : "+aliRecord.getAverage());
         
-        System.out.println("Count :"+StudentRecord.getStudentCount());
+        System.out.println("Count :"+StudentRecord.getstudentCount());
     }
 }
