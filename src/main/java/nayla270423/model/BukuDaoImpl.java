@@ -4,9 +4,6 @@
  */
 package nayla270423.model;
 import java.util.*;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author TUF Gaming
@@ -14,6 +11,11 @@ import java.util.List;
 public class BukuDaoImpl implements BukuDao {
     
     List<Buku> data = new ArrayList();
+    
+    public BukuDaoImpl(){
+        data.add(new Buku("1001","matahari","Tereliye","L","2000"));
+        data.add(new Buku("1002","pulang","Samudra","P","2002"));
+    }
     
     public void save(Buku buku){
         data.add(buku);
@@ -28,10 +30,10 @@ public class BukuDaoImpl implements BukuDao {
     }
     
     public Buku getBuku(int index){
-        return null;
+        return data.get(index);
     }
     
     public List<Buku> getAllBuku(){
-        return null;
+        return data;
     }
 }

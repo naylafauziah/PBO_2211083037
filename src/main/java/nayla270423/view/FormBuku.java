@@ -3,18 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package nayla270423.view;
-
+import nayla270423.controller.*;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 /**
  *
  * @author TUF Gaming
  */
-public class Buku extends javax.swing.JFrame {
+public class FormBuku extends javax.swing.JFrame {
 
     /**
-     * Creates new form Buku
+     * Creates new form FormBuku
      */
-    public Buku() {
+    BukuController controller;
+    public FormBuku(){
         initComponents();
+        controller = new BukuController(this);
+        controller.bersihForm();
+        controller.tampil();
     }
     
     public javax.swing.JTextField getTxtKodeBuku(){
@@ -33,10 +39,14 @@ public class Buku extends javax.swing.JFrame {
         return txtPenerbit;
     }
     
+    public javax.swing.JTextField getTxtTahun(){
+       return txtTahun;
+    }
+    
     public javax.swing.JTable getTblBuku(){
         return tblBuku;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,11 +60,11 @@ public class Buku extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         txtKodeBuku = new javax.swing.JTextField();
         txtJudulBuku = new javax.swing.JTextField();
         txtPengarang = new javax.swing.JTextField();
         txtPenerbit = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         txtTahun = new javax.swing.JTextField();
         btnInsert = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -62,53 +72,59 @@ public class Buku extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBuku = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jLabel1.setText("Kode Buku");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 20, 80, 18);
+        jLabel1.setBounds(20, 70, 100, 18);
 
         jLabel2.setText("Judul Buku");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 50, 90, 18);
+        jLabel2.setBounds(20, 100, 100, 18);
 
         jLabel3.setText("Pengarang");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 80, 70, 18);
+        jLabel3.setBounds(20, 130, 100, 20);
 
         jLabel4.setText("Penerbit");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 110, 60, 18);
-
-        jLabel5.setText("Tahun");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(20, 140, 34, 18);
+        jLabel4.setBounds(20, 160, 100, 18);
 
         txtKodeBuku.setText("jTextField1");
         getContentPane().add(txtKodeBuku);
-        txtKodeBuku.setBounds(180, 20, 390, 24);
+        txtKodeBuku.setBounds(180, 70, 420, 24);
 
         txtJudulBuku.setText("jTextField2");
         getContentPane().add(txtJudulBuku);
-        txtJudulBuku.setBounds(180, 50, 390, 24);
+        txtJudulBuku.setBounds(180, 100, 420, 24);
 
         txtPengarang.setText("jTextField3");
         getContentPane().add(txtPengarang);
-        txtPengarang.setBounds(180, 80, 390, 24);
+        txtPengarang.setBounds(180, 130, 420, 24);
 
         txtPenerbit.setText("jTextField4");
         getContentPane().add(txtPenerbit);
-        txtPenerbit.setBounds(180, 110, 390, 24);
+        txtPenerbit.setBounds(180, 160, 420, 24);
+
+        jLabel5.setText("Tahun");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(20, 190, 35, 18);
 
         txtTahun.setText("jTextField5");
         getContentPane().add(txtTahun);
-        txtTahun.setBounds(180, 140, 390, 24);
+        txtTahun.setBounds(180, 190, 420, 24);
 
         btnInsert.setText("Insert");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnInsert);
-        btnInsert.setBounds(60, 200, 72, 24);
+        btnInsert.setBounds(90, 240, 72, 24);
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -117,15 +133,20 @@ public class Buku extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnUpdate);
-        btnUpdate.setBounds(190, 200, 72, 24);
+        btnUpdate.setBounds(240, 240, 73, 24);
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnDelete);
-        btnDelete.setBounds(330, 200, 72, 24);
+        btnDelete.setBounds(380, 240, 72, 24);
 
         btnCancel.setText("Cancel");
         getContentPane().add(btnCancel);
-        btnCancel.setBounds(460, 200, 72, 24);
+        btnCancel.setBounds(510, 240, 72, 24);
 
         tblBuku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,17 +159,49 @@ public class Buku extends javax.swing.JFrame {
                 "Kode Buku", "Judul Buku", "Pengarang", "Penerbit", "Tahun"
             }
         ));
+        tblBuku.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBukuMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblBuku);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 240, 560, 190);
+        jScrollPane1.setBounds(60, 290, 550, 180);
 
-        pack();
+        jLabel6.setText("PROGRAM BUKU");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(270, 20, 120, 30);
+
+        setSize(new java.awt.Dimension(689, 550));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        // TODO add your handling code here:
+        controller.saveBuku();
+        controller.tampil();
+        controller.bersihForm();
+    }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        controller.updateBuku();
+        controller.tampil();
+        controller.bersihForm();
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        controller.delete();
+        controller.tampil();
+        controller.bersihForm();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void tblBukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBukuMouseClicked
+        // TODO add your handling code here:
+        controller.getBuku();
+    }//GEN-LAST:event_tblBukuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -167,20 +220,20 @@ public class Buku extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Buku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormBuku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Buku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormBuku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Buku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormBuku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Buku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormBuku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Buku().setVisible(true);
+                new FormBuku().setVisible(true);
             }
         });
     }
@@ -195,6 +248,7 @@ public class Buku extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBuku;
     private javax.swing.JTextField txtJudulBuku;
@@ -203,4 +257,5 @@ public class Buku extends javax.swing.JFrame {
     private javax.swing.JTextField txtPengarang;
     private javax.swing.JTextField txtTahun;
     // End of variables declaration//GEN-END:variables
+
 }

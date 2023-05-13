@@ -4,7 +4,6 @@
  */
 package nayla270423.model;
 import java.util.*;
-import java.util.List;
 
 /**
  *
@@ -13,6 +12,11 @@ import java.util.List;
 public class AnggotaDaoImpl implements AnggotaDao {
     
     List<Anggota> data = new ArrayList();
+    
+    public AnggotaDaoImpl(){
+        data.add(new Anggota("0001","nayla","andalas","P"));
+        data.add(new Anggota("0002","dhiva","limau manis","P"));
+    }
     
     public void save(Anggota anggota){
         data.add(anggota);
@@ -27,10 +31,10 @@ public class AnggotaDaoImpl implements AnggotaDao {
     }
     
     public Anggota getAnggota(int index){
-        return null;
+        return data.get(index);
     }
     
     public List<Anggota> getAllAnggota(){
-        return null;
+        return data;
     }
 }
