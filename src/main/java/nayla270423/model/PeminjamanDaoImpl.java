@@ -4,11 +4,13 @@
  */
 package nayla270423.model;
 import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 /**
  *
  * @author TUF Gaming
  */
-public class PeminjamanDaoImpl {
+public class PeminjamanDaoImpl implements PeminjamanDao{
     List<Peminjaman> data = new ArrayList<>();
     public PeminjamanDaoImpl(){
         AnggotaDao daoAnggota = new AnggotaDaoImpl();

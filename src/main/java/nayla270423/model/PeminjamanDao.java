@@ -14,6 +14,6 @@ public interface PeminjamanDao {
     void save(Peminjaman peminjaman);
     void update(int idx, Peminjaman peminjaman);
     void delete(int idx);
-    Buku getPeminjaman(int idx);
+    Peminjaman getPeminjaman(int idx);
     public List<Peminjaman> getAllPeminjaman();
 }

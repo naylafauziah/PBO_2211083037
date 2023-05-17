@@ -14,7 +14,7 @@ public class Peminjaman {
     private String tglpinjam;
     private String tglkembali;
     
-    public Peminjaman(){
+    public Peminjaman(){   
         
     }
     

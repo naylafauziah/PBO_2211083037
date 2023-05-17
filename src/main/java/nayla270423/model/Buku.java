@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -15,7 +16,8 @@ public class Buku {
     private String penerbit;
     private String tahun;
     
-    public Buku() {
+    public Buku(){
+        
     }
     
     public Buku(String kodeBuku, String judulBuku, String pengarang, String penerbit, String tahun){
