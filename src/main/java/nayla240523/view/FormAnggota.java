@@ -93,9 +93,9 @@ public class FormAnggota extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Form Anggota");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(210, 20, 40, 18);
+        jLabel1.setBounds(210, 20, 90, 18);
 
         jLabel2.setText("No BP");
         getContentPane().add(jLabel2);
