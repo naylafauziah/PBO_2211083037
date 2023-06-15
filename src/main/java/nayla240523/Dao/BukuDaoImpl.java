@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import nayla240523.model.Buku;
+import java.sql.*;
+import java.util.*;
 
 /**
  *
@@ -23,60 +25,60 @@ public class BukuDaoImpl implements BukuDao {
     }
     
     public void insert(Buku buku) throws SQLException{
-        String sql = "Insert into anggota values(?,?,?,?)";
+        String sql = "Insert into buku values(?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, anggota.getNoBp());
-        ps.setString(2, anggota.getNama());
-        ps.setString(3, anggota.getAlamat());
-        ps.setString(4, anggota.getJenisKelamin());
+        ps.setString(1, buku.getKodeBuku());
+        ps.setString(2, buku.getJudulBuku());
+        ps.setString(3, buku.getPengarang());
+        ps.setString(4, buku.getPenerbit());
         ps.executeUpdate();
     }
     
     public void update(Buku buku) throws SQLException{
-        String sql = "Update anggota set nama = ?, alamat = ?, jeniskelamin = ? where nobp = ?";
+        String sql = "Update buku set judulbuku = ?, pengarang = ?, penerbit = ? where kodebuku = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, anggota.getNama());
-        ps.setString(2, anggota.getAlamat());
-        ps.setString(3, anggota.getJenisKelamin());
-        ps.setString(4, anggota.getNoBp());
+        ps.setString(1, buku.getKodeBuku());
+        ps.setString(2, buku.getJudulBuku());
+        ps.setString(3, buku.getPengarang());
+        ps.setString(4, buku.getPenerbit());
         ps.executeUpdate();
     }
     
-    public void delete(String nobp) throws SQLException{
-        String sql = "Delete from anggota where nobp = ?";
+    public void delete(String kodebuku) throws SQLException{
+        String sql = "Delete from buku where kodebuku = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, nobp);
+        ps.setString(1, kodebuku);
         ps.executeUpdate();
     }
     
-    public Buku getBuku(String nobp) throws SQLException{
-        String sql = "select * from anggota where nobp = ?";
+    public Buku getBuku(String kodebuku) throws SQLException{
+        String sql = "select * from buku where kodebuku = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, nobp);
+        ps.setString(1, kodebuku);
         ResultSet rs = ps.executeQuery();
         Buku buku = null;
         if(rs.next()){
             buku = new Buku();
-            buku.setNoBp(rs.getString(1));
-            buku.setNama(rs.getString(2));
-            buku.setAlamat(rs.getString(3));
-            buku.setJenisKelamin(rs.getString(4));
+            buku.setKodeBuku(rs.getString(1));
+            buku.setJudulBuku(rs.getString(2));
+            buku.setPengarang(rs.getString(3));
+            buku.setPenerbit(rs.getString(4));
         }
-        return anggota;
+        return buku;
     }
     
     public List<Buku> getAll() throws SQLException{
-        String sql = "select * from anggota";
+        String sql = "select * from buku";
         PreparedStatement ps = connection.prepareStatement(sql);
         Buku buku = null;
         ResultSet rs = ps.executeQuery();
         List<Buku> list = new ArrayList<>();
         while(rs.next()){
             buku = new Buku();
-            buku.setNoBp(rs.getString(1));
-            buku.setNama(rs.getString(2));
-            buku.setAlamat(rs.getString(3));
-            buku.setJenisKelamin(rs.getString(4));
+            buku.setKodeBuku(rs.getString(1));
+            buku.setJudulBuku(rs.getString(2));
+            buku.setPengarang(rs.getString(3));
+            buku.setPenerbit(rs.getString(4));
             list.add(buku);
         }
         return list;
