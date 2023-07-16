@@ -23,30 +23,34 @@ public class PeminjamanDaoImpl implements PeminjamanDao {
     public PeminjamanDaoImpl(Connection connection){
         this.connection = connection;
     }
+
     @Override
     public void insert(Peminjaman peminjaman) throws SQLException {
-        String sql = "Insert into peminjaman values(?,?,?,?)";
+        String sql = "Insert into peminjaman(tglkembali, nobp, kodebuku, tglpinjam) values(?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, peminjaman.getNobp());
-        ps.setString(2, peminjaman.getKodeBuku());
-        ps.setString(3, peminjaman.getTglPinjam());
-        ps.setString(4, peminjaman.getTglKembali());
+        ps.setString(1, peminjaman.getTglKembali());
+        ps.setString(2, peminjaman.getNobp());
+        ps.setString(3, peminjaman.getKodeBuku());
+        ps.setString(4, peminjaman.getTglPinjam());
         ps.executeUpdate();
     }
 
     @Override
     public void update(Peminjaman peminjaman) throws SQLException {
-        String sql = "Update peminjaman set tglkembali=?" + "where nobp=? and kodebuku=? and tglpinjam=?" ;
+        String sql="update peminjaman set tglkembali=?"
+                    +"where nobp=? and kodebuku=? and tglpinjam=?";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, peminjaman.getNobp());
-        ps.setString(2, peminjaman.getKodeBuku());
-        ps.setString(3, peminjaman.getTglPinjam());
-        ps.setString(4, peminjaman.getTglKembali());
-        ps.executeUpdate();    
+        ps.setString(1, peminjaman.getTglKembali());
+        ps.setString(2, peminjaman.getNobp());
+        ps.setString(3, peminjaman.getKodeBuku());
+        ps.setString(4, peminjaman.getTglPinjam());
+        ps.executeUpdate();                                                                                                                                                                                        
     }
 
+    @Override
     public void delete(Peminjaman peminjaman) throws SQLException {
-        String sql = "Delete from peminjaman "+ "where nobp=? and kodebuku=? and tglpinjam=?";
+        String sql="delete from peminjaman "
+                    +"where nobp=? and kodebuku=? and tglpinjam=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, peminjaman.getNobp());
         ps.setString(2, peminjaman.getKodeBuku());
@@ -55,12 +59,13 @@ public class PeminjamanDaoImpl implements PeminjamanDao {
     }
 
     @Override
-    public Peminjaman getPeminjaman(String nobp, String kodebuku, String tglpinjam) throws SQLException {
-        String sql = "select * from peminjaman " + "where nobp=? and kodenuku=? and tglpinjam=?";
+    public Peminjaman getPeminjaman(String nobp, String kodeBuku, String tglPinjam) throws SQLException {
+        String sql="select * from peminjaman "
+                    + " where nobp=? and kodebuku=? and tglpinjam=?" ;
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, nobp);
-        ps.setString(2, kodebuku);
-        ps.setString(3, tglpinjam);
+        ps.setString(2, kodeBuku);
+        ps.setString(3, tglPinjam);
         ResultSet rs = ps.executeQuery();
         Peminjaman peminjaman = null;
         if(rs.next()){
@@ -75,12 +80,12 @@ public class PeminjamanDaoImpl implements PeminjamanDao {
 
     @Override
     public List<Peminjaman> getAll() throws SQLException {
-        String sql = "select * from peminjaman";
+        String sql="Select * from peminjaman ";
         PreparedStatement ps = connection.prepareStatement(sql);
         Peminjaman peminjaman = null;
         ResultSet rs = ps.executeQuery();
-        List<Peminjaman> list = new ArrayList<>();
-        while(rs.next()){
+        List <Peminjaman> list = new ArrayList<>();
+        while (rs.next()){
             peminjaman = new Peminjaman();
             peminjaman.setNobp(rs.getString(1));
             peminjaman.setKodeBuku(rs.getString(2));
@@ -89,6 +94,5 @@ public class PeminjamanDaoImpl implements PeminjamanDao {
             list.add(peminjaman);
         }
         return list;
-    }
-    
+    } 
 }

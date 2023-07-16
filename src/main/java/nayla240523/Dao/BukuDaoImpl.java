@@ -25,22 +25,24 @@ public class BukuDaoImpl implements BukuDao {
     }
     
     public void insert(Buku buku) throws SQLException{
-        String sql = "Insert into buku values(?,?,?,?)";
+        String sql = "Insert into buku values(?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, buku.getKodeBuku());
         ps.setString(2, buku.getJudulBuku());
         ps.setString(3, buku.getPengarang());
         ps.setString(4, buku.getPenerbit());
+        ps.setString(5, buku.getTahunTerbit());
         ps.executeUpdate();
     }
     
     public void update(Buku buku) throws SQLException{
-        String sql = "Update buku set judulbuku = ?, pengarang = ?, penerbit = ? where kodebuku = ?";
+        String sql = "Update buku set judulbuku = ?, pengarang = ?, penerbit = ?, tahunterbit = ?, where kodebuku = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, buku.getKodeBuku());
         ps.setString(2, buku.getJudulBuku());
         ps.setString(3, buku.getPengarang());
         ps.setString(4, buku.getPenerbit());
+        ps.setString(5, buku.getTahunTerbit());
         ps.executeUpdate();
     }
     
@@ -63,6 +65,7 @@ public class BukuDaoImpl implements BukuDao {
             buku.setJudulBuku(rs.getString(2));
             buku.setPengarang(rs.getString(3));
             buku.setPenerbit(rs.getString(4));
+            buku.setTahunTerbit(rs.getString(5));
         }
         return buku;
     }
@@ -79,6 +82,7 @@ public class BukuDaoImpl implements BukuDao {
             buku.setJudulBuku(rs.getString(2));
             buku.setPengarang(rs.getString(3));
             buku.setPenerbit(rs.getString(4));
+            buku.setTahunTerbit(rs.getString(5));
             list.add(buku);
         }
         return list;

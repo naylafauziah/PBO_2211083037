@@ -4,6 +4,7 @@
  */
 package nayla240523.view;
 
+import nayla240523.controller.BukuController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,9 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import nayla240523.controller.*;
-
-
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 /**
  *
  * @author TUF Gaming
@@ -23,28 +23,12 @@ public class FormBuku extends javax.swing.JFrame {
     /**
      * Creates new form FormBuku
      */
-    private BukuController controller;
+    private final BukuController controller;
     public FormBuku() {
         initComponents();
         controller = new BukuController(this);
         controller.clearForm();
         controller.tampilTabel();
-    }
-
-    public JButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public JButton getBtnInsert() {
-        return btnInsert;
-    }
-
-    public JButton getBtnUpdate() {
-        return btnUpdate;
-    }
-
-    public JTable getTblBuku() {
-        return tblBuku;
     }
 
     public JTextField getTxtJudulBuku() {
@@ -63,6 +47,13 @@ public class FormBuku extends javax.swing.JFrame {
         return txtPengarang;
     }
     
+     public JTextField getTxtTahunTerbit() {
+        return txtTahunTerbit;
+    }
+    
+    public JTable getTblBuku() {
+        return tblBuku;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -85,48 +76,50 @@ public class FormBuku extends javax.swing.JFrame {
         btnInsert = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBuku = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        txtTahunTerbit = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jLabel1.setText("Form Buku");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(260, 20, 80, 18);
+        jLabel1.setBounds(320, 20, 70, 18);
 
         jLabel2.setText("Kode Buku");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 70, 59, 18);
+        jLabel2.setBounds(20, 60, 110, 18);
 
         jLabel3.setText("Judul Buku");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 100, 61, 18);
+        jLabel3.setBounds(20, 100, 61, 18);
 
         jLabel4.setText("Pengarang");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(30, 130, 60, 18);
+        jLabel4.setBounds(20, 140, 60, 18);
 
         jLabel5.setText("Penerbit");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(30, 160, 60, 18);
+        jLabel5.setBounds(20, 180, 46, 18);
 
         txtKodeBuku.setText("jTextField1");
         getContentPane().add(txtKodeBuku);
-        txtKodeBuku.setBounds(150, 70, 310, 30);
+        txtKodeBuku.setBounds(160, 50, 440, 30);
 
         txtJudulBuku.setText("jTextField2");
         getContentPane().add(txtJudulBuku);
-        txtJudulBuku.setBounds(150, 100, 310, 30);
+        txtJudulBuku.setBounds(160, 90, 440, 30);
 
         txtPengarang.setText("jTextField3");
         getContentPane().add(txtPengarang);
-        txtPengarang.setBounds(150, 130, 310, 30);
+        txtPengarang.setBounds(160, 134, 440, 30);
 
         txtPenerbit.setText("jTextField4");
         getContentPane().add(txtPenerbit);
-        txtPenerbit.setBounds(150, 160, 310, 30);
+        txtPenerbit.setBounds(160, 174, 440, 30);
 
         btnInsert.setText("Insert");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +128,7 @@ public class FormBuku extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnInsert);
-        btnInsert.setBounds(30, 230, 72, 24);
+        btnInsert.setBounds(40, 270, 72, 24);
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +137,7 @@ public class FormBuku extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnUpdate);
-        btnUpdate.setBounds(180, 230, 72, 24);
+        btnUpdate.setBounds(200, 270, 73, 24);
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -153,21 +146,26 @@ public class FormBuku extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDelete);
-        btnDelete.setBounds(330, 230, 72, 24);
+        btnDelete.setBounds(360, 270, 72, 24);
 
-        jButton4.setText("Cancel");
-        getContentPane().add(jButton4);
-        jButton4.setBounds(480, 230, 72, 24);
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCancel);
+        btnCancel.setBounds(530, 270, 72, 24);
 
         tblBuku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Kode Buku", "Judul Buku", "Pengarang", "Penerbit"
+                "Kode Buku", "Judul Buku", "Pengarang", "Penerbit", "Tahun terbit"
             }
         ));
         tblBuku.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -178,50 +176,51 @@ public class FormBuku extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblBuku);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(32, 270, 540, 220);
+        jScrollPane1.setBounds(32, 320, 680, 150);
 
-        setSize(new java.awt.Dimension(618, 522));
+        jLabel6.setText("Tahun Terbit");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(20, 220, 90, 18);
+
+        txtTahunTerbit.setText("jTextField1");
+        getContentPane().add(txtTahunTerbit);
+        txtTahunTerbit.setBounds(160, 210, 440, 30);
+
+        setSize(new java.awt.Dimension(756, 566));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         // TODO add your handling code here:
-        try {
-            // TODO add your handling code here:
-            controller.saveBuku();
-        } catch (SQLException ex) {
-            Logger.getLogger(FormBuku.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        controller.insert();
         controller.tampilTabel();
         controller.clearForm();
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        try {
-            controller.update();
-            controller.tampilTabel();
-            controller.clearForm();
-        } catch (SQLException sqlex){
-            JOptionPane.showMessageDialog(rootPane, "Gagal disimpan = "+sqlex);
-        }
+        controller.update();
+        controller.tampilTabel();
+        controller.clearForm();
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        controller.delete();
+        controller.tampilTabel();
+        controller.clearForm();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        controller.tampilTabel();
+        controller.clearForm();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     private void tblBukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBukuMouseClicked
         // TODO add your handling code here:
         controller.getBuku();
     }//GEN-LAST:event_tblBukuMouseClicked
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        try {
-            controller.delete();
-            controller.tampilTabel();
-            controller.clearForm();
-        } catch (SQLException sqlex){
-            JOptionPane.showMessageDialog(rootPane, "Gagal disimpan = "+sqlex);
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,20 +258,22 @@ public class FormBuku extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBuku;
     private javax.swing.JTextField txtJudulBuku;
     private javax.swing.JTextField txtKodeBuku;
     private javax.swing.JTextField txtPenerbit;
     private javax.swing.JTextField txtPengarang;
+    private javax.swing.JTextField txtTahunTerbit;
     // End of variables declaration//GEN-END:variables
 }

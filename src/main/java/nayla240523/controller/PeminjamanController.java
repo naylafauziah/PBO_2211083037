@@ -85,7 +85,7 @@ public class PeminjamanController {
             peminjamanDao.insert(peminjaman);
             JOptionPane.showMessageDialog(formPeminjaman, "Entri Ok");
         } catch (SQLException ex) {
-            Logger.getLogger(PeminjamanController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(formPeminjaman, ex.getMessage());
         }
     }
     
@@ -142,15 +142,15 @@ public class PeminjamanController {
     
     public void update() throws SQLException{
         try {
-        peminjaman = new Peminjaman();
-        peminjaman.setNobp(formPeminjaman.getCboNobp().getSelectedItem().toString().split("-")[0]);
-        peminjaman.setKodeBuku(formPeminjaman.getCboKodebuku().getSelectedItem().toString().split("-")[0]);
-        peminjaman.setTglPinjam(formPeminjaman.getTxtTglPinjam().getText());
-        peminjaman.setTglKembali(formPeminjaman.getTxtTglKembali().getText());
-        peminjamanDao.update(peminjaman);
-        JOptionPane.showMessageDialog(formPeminjaman, "Update Ok");
+            peminjaman = new Peminjaman();
+            peminjaman.setNobp(formPeminjaman.getCboNobp().getSelectedItem().toString().split("-")[0]);
+            peminjaman.setKodeBuku(formPeminjaman.getCboKodebuku().getSelectedItem().toString().split("-")[0]);
+            peminjaman.setTglPinjam(formPeminjaman.getTxtTglPinjam().getText());
+            peminjaman.setTglKembali(formPeminjaman.getTxtTglKembali().getText());
+            peminjamanDao.update(peminjaman);
+            JOptionPane.showMessageDialog(formPeminjaman, "Update Ok");
         } catch (SQLException ex) {
-            Logger.getLogger(PeminjamanController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(formPeminjaman, ex.getMessage());
         }
     }
 }
